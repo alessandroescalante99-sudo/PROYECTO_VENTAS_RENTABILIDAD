@@ -20,7 +20,7 @@ URL_BASE_DATOS = (
 ARCHIVO_DB = "BaseDeDatos_Original.db"
 ARCHIVO_SALIDA = "SuperTienda.csv"
 
-# EXTRACT
+# Extraccion
 
 def extract(url: str = URL_BASE_DATOS, archivo_destino: str = ARCHIVO_DB) -> str:
 
@@ -39,8 +39,6 @@ def extract(url: str = URL_BASE_DATOS, archivo_destino: str = ARCHIVO_DB) -> str
 
     print("Base de datos descargada correctamente.\n")
     return archivo_destino
-
-# EXTRACT
 
 def cargar_dataframe_unido(ruta_db: str) -> pd.DataFrame:
 
@@ -87,7 +85,7 @@ def cargar_dataframe_unido(ruta_db: str) -> pd.DataFrame:
     finally:
         conexion.close()
 
-# TRANSFORM
+# Transformacion
 
 def transform(df: pd.DataFrame) -> pd.DataFrame:
 
@@ -132,7 +130,7 @@ def transform(df: pd.DataFrame) -> pd.DataFrame:
 
     return df
 
-# LOAD
+# Cargar
 
 def load(df: pd.DataFrame, nombre_archivo: str = ARCHIVO_SALIDA) -> None:
     """Exporta el DataFrame final a un archivo CSV."""
