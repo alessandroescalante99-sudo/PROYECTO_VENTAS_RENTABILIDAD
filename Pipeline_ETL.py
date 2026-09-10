@@ -22,7 +22,7 @@ ARCHIVO_SALIDA = "SuperTienda.csv"
 
 # Extraccion
 
-def extract(url: str = URL_BASE_DATOS, archivo_destino: str = ARCHIVO_DB) -> str:
+def extraer(url: str = URL_BASE_DATOS, archivo_destino: str = ARCHIVO_DB) -> str:
 
     print(f"Descargando base de datos desde: {url}")
     response = requests.get(url)
@@ -87,7 +87,7 @@ def cargar_dataframe_unido(ruta_db: str) -> pd.DataFrame:
 
 # Transformacion
 
-def transform(df: pd.DataFrame) -> pd.DataFrame:
+def transformar(df: pd.DataFrame) -> pd.DataFrame:
 
     df = df.copy()
 
@@ -132,7 +132,7 @@ def transform(df: pd.DataFrame) -> pd.DataFrame:
 
 # Cargar
 
-def load(df: pd.DataFrame, nombre_archivo: str = ARCHIVO_SALIDA) -> None:
+def cargar(df: pd.DataFrame, nombre_archivo: str = ARCHIVO_SALIDA) -> None:
     """Exporta el DataFrame final a un archivo CSV."""
     df.to_csv(
         nombre_archivo,
@@ -146,11 +146,11 @@ def load(df: pd.DataFrame, nombre_archivo: str = ARCHIVO_SALIDA) -> None:
 
 # PIPELINE COMPLETO
 
-def run_pipeline() -> None:
-    ruta_db = extract()
+def correr_pipeline() -> None:
+    ruta_db = extraer()
     df_crudo = cargar_dataframe_unido(ruta_db)
-    df_limpio = transform(df_crudo)
-    load(df_limpio)
+    df_limpio = transformar(df_crudo)
+    cargar(df_limpio)
 
 if __name__ == "__main__":
-    run_pipeline()
+    correr_pipeline()
