@@ -47,7 +47,13 @@ def cargar_dataframe_unido(ruta_db: str) -> pd.DataFrame:
         cursor = conexion.cursor()
 
         cursor.execute("SELECT name FROM sqlite_master WHERE type='table';")
-        tablas = [t[0] for t in cursor.fetchall()]
+
+        resultados = cursor.fetchall()
+        tablas = []
+        for t in resultados:
+            nombre_tabla = t[0]
+            tablas.append(nombre_tabla)
+
         print(f"Tablas disponibles: {tablas}\n")
 
         cursor.execute(
@@ -77,7 +83,11 @@ def cargar_dataframe_unido(ruta_db: str) -> pd.DataFrame:
         )
 
         resultado = cursor.fetchall()
-        columnas = [col[0] for col in cursor.description]
+        columnas = []
+        for col in cursor.description:
+            nombre = col[0]
+            columnas.append(nombre)
+
         df = pd.DataFrame(resultado, columns=columnas)
 
         print(f"DataFrame combinado: {len(df)} filas, {len(df.columns)} columnas.\n")
